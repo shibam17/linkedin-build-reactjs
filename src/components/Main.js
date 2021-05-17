@@ -29,6 +29,9 @@ const Main = () => {
           </button>
         </div>
       </ShareBox>
+      <div>
+        <Article>Article</Article>
+      </div>
     </Container>
   );
 };
@@ -103,6 +106,12 @@ const ShareBox = styled(CommonCard)`
       padding-bottom:4px;
     }
   }
+`;
+
+const Article = styled(CommonCard)`
+padding:0;
+margin:0 0  8px;
+overflow:visible;
 `;
 
 export default Main;
