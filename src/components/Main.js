@@ -41,9 +41,15 @@ const Main = () => {
               </div>
             </a>
             <button>
-              <img src="/images/elipse.svg" alt=""  width= "25px"/>
+              <img src='/images/elipse.svg' alt='' width='25px' />
             </button>
           </SharedActor>
+          <Description>discription</Description>
+          <SharedImage>
+            <a>
+              <img src='/images/shared.jpg' alt='' />
+            </a>
+          </SharedImage>
         </Article>
       </div>
     </Container>
@@ -129,54 +135,74 @@ const Article = styled(CommonCard)`
 `;
 
 const SharedActor = styled.div`
-padding-right:40px;
-flex-wrap:nowrap;
-padding:14px 16px 0;
-margin-bottom:8px;
-align-items:center;
-display:flex;
-a{
-  margin-right:12px;
-  display:flex;
-  flex-grow:1;
-  overflow:hidden;
-  text-decoration:none;
-
-  img{
-    width:48px;
-    height:48px;
-  }
-  &> div{
-    display:flex;
-    flex-direction:column;
-    flex-grow:1;
-    flex-basis:0;
-    margin-left:8px;
+  padding-right: 40px;
+  flex-wrap: nowrap;
+  padding: 14px 16px 0;
+  margin-bottom: 8px;
+  align-items: center;
+  display: flex;
+  a {
+    margin-right: 12px;
+    display: flex;
+    flex-grow: 1;
     overflow: hidden;
-    span{
-      text-align:left;
-      &:first-child{
-        font-size:14px;
-        font-weight:700;
-        color:rgba(0, 0, 0, 1);
-      }
-      & :nth-child(n+1){
-        font-size:12px;
-        color:rgba(0, 0, 0, 0.6);
+    text-decoration: none;
+
+    img {
+      width: 48px;
+      height: 48px;
+    }
+    & > div {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      flex-basis: 0;
+      margin-left: 8px;
+      overflow: hidden;
+      span {
+        text-align: left;
+        &:first-child {
+          font-size: 14px;
+          font-weight: 700;
+          color: rgba(0, 0, 0, 1);
+        }
+        & :nth-child(n + 1) {
+          font-size: 12px;
+          color: rgba(0, 0, 0, 0.6);
+        }
       }
     }
   }
-}
 
-button{
-  position: absolute;
-  right:12px;
-  top:0;
-  background:transparent;
-  border:none;
-  outline:none;
-  
+  button {
+    position: absolute;
+    right: 12px;
+    top: 0;
+    background: transparent;
+    border: none;
+    outline: none;
+  }
+`;
+
+const Description = styled.div`
+  padding: 0 16px;
+  overflow: hidden;
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 14px;
+  text-align: left;
+`;
+
+const SharedImage = styled.div`
+margin-top:8px;
+width:100%;
+display:block;
+position:relative;
+background-color: #f9fafb;
+img{
+  object-fit:contain;
+  width:100%;
+  height:100%;
 }
-`
+`;
 
 export default Main;
