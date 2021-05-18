@@ -50,6 +50,20 @@ const Main = () => {
               <img src='/images/shared.jpg' alt='' />
             </a>
           </SharedImage>
+          <SocialCounts>
+            <li>
+              <button>
+                <img src='/images/like-button.svg' alt='' width='25px' />
+                <span>75</span>
+              </button>
+            </li>
+          </SocialCounts>
+          <SocialAction>
+            <button>
+              <img src='/images/like-button.svg' alt='' width='25px' />
+              <span>Like</span>
+            </button>
+          </SocialAction>
         </Article>
       </div>
     </Container>
@@ -193,16 +207,54 @@ const Description = styled.div`
 `;
 
 const SharedImage = styled.div`
-margin-top:8px;
-width:100%;
-display:block;
-position:relative;
-background-color: #f9fafb;
-img{
-  object-fit:contain;
-  width:100%;
-  height:100%;
-}
+  margin-top: 8px;
+  width: 100%;
+  display: block;
+  position: relative;
+  background-color: #f9fafb;
+  img {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+  }
 `;
+
+const SocialCounts = styled.ul`
+line-height:1.3;
+display:flex;
+align-items:flex-Start;
+overflow:auto;
+margin:0 16px;
+padding: 8px 0;
+border-bottom: 1px solid #e9e5d5;
+list-style:none;
+li{
+  margin-right:5px;
+  font-size:12px;
+  button{
+    display:flex;
+  }
+}
+`
+
+const SocialAction = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 48px;
+  padding: 4px 8px;
+  button {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px;
+
+    @media (min-width: 768px) {
+      span {
+        margin-left: 8px;
+      }
+    }
+  }
+`;
+
 
 export default Main;
