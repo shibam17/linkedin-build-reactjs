@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import React from "react";
+import { connect } from "react-redux";
 
 const Leftside = (props) => {
   return (
@@ -205,4 +206,4 @@ const mapStateToProps = (state) =>{
   }
 }
 
-export default Leftside;
+export default connect(mapStateToProps)(Leftside);
