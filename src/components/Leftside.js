@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React from "react";
 
-const Leftside = () => {
+const Leftside = (props) => {
   return (
     <Container>
       <ArtCard>
@@ -9,7 +9,9 @@ const Leftside = () => {
           <CardBackground />
           <a>
             <Photo />
-            <Link>Welcome, {props.user ? props.user.displayName : "there"}!</Link>
+            <Link>
+              Welcome, {props.user ? props.user.displayName : "there"}!
+            </Link>
           </a>
           <a>
             <AddPhotoText>Add a photo</AddPhotoText>
