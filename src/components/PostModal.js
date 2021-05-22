@@ -18,6 +18,26 @@ const PostModal = () => {
             <span>name</span>
           </UserInfo>
         </SharedContent>
+        <ShareCreation>
+          <AttachAssets>
+            <AssetButton>
+              <img
+                src='/images/share-icon.png'
+                width='20px'
+                height='20px'
+                alt=''
+              />
+            </AssetButton>
+            <AssetButton>
+              <img
+                src='/images/youtube-icon.png'
+                width='20px'
+                height='20px'
+                alt=''
+              />
+            </AssetButton>
+          </AttachAssets>
+        </ShareCreation>
       </Content>
     </Container>
   );
@@ -98,6 +118,27 @@ const UserInfo = styled.div`
     line-height: 1.5;
     margin-left: 5px;
   }
+`;
+
+const ShareCreation = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 24px 12px 16px;
+`;
+
+const AttachAssets = styled.div`
+  align-items: center;
+  display: flex;
+  padding-right: 8px;
+`;
+
+const AssetButton = styled.button`
+  display: flex;
+  align-items: center;
+  height: 40px;
+  min-width: auto;
+  color: rgba(0,0,0,0.5);
+
 `;
 
 export default PostModal;
