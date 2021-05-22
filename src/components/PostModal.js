@@ -37,6 +37,20 @@ const PostModal = () => {
               />
             </AssetButton>
           </AttachAssets>
+          <ShareComment>
+            <AssetButton>
+              <img
+                src='/images/comment.svg'
+                width='20px'
+                height='20px'
+                alt=''
+              />
+              Anyone
+            </AssetButton>
+          </ShareComment>
+          <PostButton>
+            post
+          </PostButton>
         </ShareCreation>
       </Content>
     </Container>
@@ -137,8 +151,31 @@ const AssetButton = styled.button`
   align-items: center;
   height: 40px;
   min-width: auto;
-  color: rgba(0,0,0,0.5);
-
+  color: rgba(0, 0, 0, 0.5);
 `;
+
+const ShareComment = styled.div`
+  padding-left: 8px;
+  margin-right: auto;
+  border-left: 1px solid rgba(0, 0, 0, 0.15);
+  ${AssetButton} {
+    svg {
+      margin-right: 5px;
+    }
+  }
+`;
+
+const PostButton = styled.button`
+min-width: 60px;
+border-radius: 20px;
+padding-left: 16px;
+padding-right: 16px;
+background: #0a66c2;
+color: white;
+&:hover{
+  background: #004182;
+}
+
+`
 
 export default PostModal;
