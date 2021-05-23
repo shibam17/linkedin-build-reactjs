@@ -5,6 +5,18 @@ import React, { useState } from "react";
 const PostModal = (props) => {
   const [editorText, setEditorText] = useState("");
 
+  const [shareImage, setShareImage] = useState("");
+
+  const handleChange = (e) => {
+    const image = e.target.files[0];
+
+    if (image === "" || image === undefined) {
+      alert("Not an image");
+      return;
+    }
+    setShareImage(image);
+  };
+
   const reset = (e) => {
     setEditorText("");
     props.handleClick(e);
@@ -31,7 +43,24 @@ const PostModal = (props) => {
                   value={editorText}
                   onChange={(e) => setEditorText(e.target.value)}
                   placeholder='What do you want to talk about?'
-                  autoFocus={true}></textarea>
+                  autoFocus={true}
+                />
+                <UploadImage>
+                  <input
+                    type='file'
+                    accept='images/png, image/jpeg'
+                    name='image'
+                    id='file'
+                    onChange={handleChange}
+                    // style={{ display: "none" }}
+                  />
+                  <p>
+                    {/* <label htmlFor="`file">
+                      Select an Image to share
+                    </label> */}
+                  </p>
+                  {shareImage && <img src={URL.createObjectURL(shareImage)} />}
+                </UploadImage>
               </Editor>
             </SharedContent>
             <ShareCreation>
@@ -64,7 +93,9 @@ const PostModal = (props) => {
                   Anyone
                 </AssetButton>
               </ShareComment>
-              <PostButton>post</PostButton>
+              <PostButton disabled={!editorText ? true : false}>
+                post
+              </PostButton>
             </ShareCreation>
           </Content>
         </Container>
@@ -82,6 +113,7 @@ const Container = styled.div`
   z-index: 9999;
   color: black;
   background-color: rgba(0, 0, 0, 0.8);
+  animation: fadeIn 0.3s;
 `;
 
 const Content = styled.div`
@@ -187,7 +219,7 @@ const PostButton = styled.button`
   border-radius: 20px;
   padding-left: 16px;
   padding-right: 16px;
-  background: #0a66c2;
+  background: ${(props) => (props.disabled ? "rgba(0,0,0,0.8)" : "#0a66c2")};
   color: white;
   &:hover {
     background: #004182;
@@ -208,5 +240,7 @@ const Editor = styled.div`
     margin-bottom: 20px;
   }
 `;
+
+const UploadImage = styled.div``;
 
 export default PostModal;
