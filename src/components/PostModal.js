@@ -2,65 +2,74 @@ import styled from "styled-components";
 
 import React, { useState } from "react";
 
-const PostModal = () => {
+const PostModal = (props) => {
   const [editorText, setEditorText] = useState("");
 
+  const reset = (e) => {
+    setEditorText("");
+    props.handleClick(e);
+  };
+
   return (
-    <Container>
-      <Content>
-        <Header>
-          <h2>Create a post</h2>
-          <button>
-            <img src='/images/close-icon.svg' width='22px' alt='' />
-          </button>
-        </Header>
-        <SharedContent>
-          <UserInfo>
-            <img src='/images/user.svg' alt='' />
-            <span>name</span>
-          </UserInfo>
-          <Editor>
-            <textarea
-              value={editorText}
-              onChange={(e) => setEditorText(e.target.value)}
-              placeholder='What do you want to talk about?'
-              autoFocus={true}></textarea>
-          </Editor>
-        </SharedContent>
-        <ShareCreation>
-          <AttachAssets>
-            <AssetButton>
-              <img
-                src='/images/share-icon.png'
-                width='20px'
-                height='20px'
-                alt=''
-              />
-            </AssetButton>
-            <AssetButton>
-              <img
-                src='/images/youtube-icon.png'
-                width='20px'
-                height='20px'
-                alt=''
-              />
-            </AssetButton>
-          </AttachAssets>
-          <ShareComment>
-            <AssetButton>
-              <img
-                src='/images/comment.svg'
-                width='20px'
-                height='20px'
-                alt=''
-              />
-              Anyone
-            </AssetButton>
-          </ShareComment>
-          <PostButton>post</PostButton>
-        </ShareCreation>
-      </Content>
-    </Container>
+    <>
+      {props.showModal === "open" && (
+        <Container>
+          <Content>
+            <Header>
+              <h2>Create a post</h2>
+              <button onClick={(event) => reset(event)}>
+                <img src='/images/close-icon.svg' width='22px' alt='' />
+              </button>
+            </Header>
+            <SharedContent>
+              <UserInfo>
+                <img src='/images/user.svg' alt='' />
+                <span>name</span>
+              </UserInfo>
+              <Editor>
+                <textarea
+                  value={editorText}
+                  onChange={(e) => setEditorText(e.target.value)}
+                  placeholder='What do you want to talk about?'
+                  autoFocus={true}></textarea>
+              </Editor>
+            </SharedContent>
+            <ShareCreation>
+              <AttachAssets>
+                <AssetButton>
+                  <img
+                    src='/images/share-icon.png'
+                    width='20px'
+                    height='20px'
+                    alt=''
+                  />
+                </AssetButton>
+                <AssetButton>
+                  <img
+                    src='/images/youtube-icon.png'
+                    width='20px'
+                    height='20px'
+                    alt=''
+                  />
+                </AssetButton>
+              </AttachAssets>
+              <ShareComment>
+                <AssetButton>
+                  <img
+                    src='/images/comment.svg'
+                    width='20px'
+                    height='20px'
+                    alt=''
+                  />
+                  Anyone
+                </AssetButton>
+              </ShareComment>
+              <PostButton>post</PostButton>
+            </ShareCreation>
+          </Content>
+        </Container>
+      )}
+    </>
   );
 };
 
@@ -105,7 +114,8 @@ const Header = styled.div`
     width: 40px;
     min-width: auto;
     color: rgba(0, 0, 0, 0.16);
-    svg {
+    svg,
+    img {
       pointer-events: none;
     }
   }
@@ -185,18 +195,18 @@ const PostButton = styled.button`
 `;
 
 const Editor = styled.div`
-padding:12px 24px;
-textarea{
-  width: 100%;
-  min-height: 100px;
-  resize: none;
-}
-input{
-  width: 100%;
-  height: 15px;
-  font-size: 16px;
-  margin-bottom: 20px;
-}
-`
+  padding: 12px 24px;
+  textarea {
+    width: 100%;
+    min-height: 100px;
+    resize: none;
+  }
+  input {
+    width: 100%;
+    height: 15px;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+`;
 
 export default PostModal;
