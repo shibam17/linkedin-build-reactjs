@@ -5,6 +5,7 @@ import ReactPlayer from "react-player";
 import { connect } from "react-redux";
 
 import firebase from "firebase";
+import { postArticleAPI } from "../actions";
 
 const PostModal = (props) => {
   const [editorText, setEditorText] = useState("");
@@ -46,8 +47,8 @@ const PostModal = (props) => {
       timestamp: firebase.firestore.Timestamp.now(),
     };
 
-    props.postArticle(payload)
-    reset(e)
+    props.postArticle(payload);
+    reset(e);
   };
 
   const reset = (e) => {
@@ -151,7 +152,9 @@ const PostModal = (props) => {
                   Anyone
                 </AssetButton>
               </ShareComment>
-              <PostButton disabled={!editorText ? true : false}>
+              <PostButton
+                disabled={!editorText ? true : false}
+                onClick={(event) => postArticle(event)}>
                 post
               </PostButton>
             </ShareCreation>
@@ -312,6 +315,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (state) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  postArticle: (payload) => dispatch(postArticleAPI(payload)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostModal);

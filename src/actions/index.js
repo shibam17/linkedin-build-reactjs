@@ -52,11 +52,11 @@ export function postArticleAPI(payload) {
         "state_changed",
         (snapshot) => {
           const progress =
-            (snapshot.bytesTransferred / snapshot.totalbytes) * 100;
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
 
-          console.log(`Progress : $(progress)%`);
+          console.log(`Progress : ${progress}%`);
           if (snapshot.stae === "RUNNING") {
-            console.log(`Progress : $(progress)%`);
+            console.log(`Progress : ${progress}%`);
           }
         },
         (error) => console.log(error.code),
