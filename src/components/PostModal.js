@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import ReactPlayer from "react-player";
 import { connect } from "react-redux";
 
+import firebase from "firebase";
+
 const PostModal = (props) => {
   const [editorText, setEditorText] = useState("");
 
@@ -27,6 +29,25 @@ const PostModal = (props) => {
     setShareImage("");
     setVideoLink("");
     setAssetArea(area);
+  };
+
+  const postArticle = (e) => {
+    e.preventDefault();
+
+    if (e.target !== e.currentTarget) {
+      return;
+    }
+
+    const payload = {
+      image: shareImage,
+      video: videoLink,
+      user: props.user,
+      description: editorText,
+      timestamp: firebase.firestore.Timestamp.now(),
+    };
+
+    props.postArticle(payload)
+    reset(e)
   };
 
   const reset = (e) => {
