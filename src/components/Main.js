@@ -1,35 +1,44 @@
 import styled from "styled-components";
-import React, { useState } from "react";
-import PostModal from './PostModal'
+import React, { useEffect, useState } from "react";
+import PostModal from "./PostModal";
+import { connect } from "react-redux";
+import { getArticleAPI } from "../actions";
 
-const Main = () => {
-  const [showModal, setShowModal] = useState("close")
+const Main = (props) => {
+  const [showModal, setShowModal] = useState("close");
 
-  const handleClick =(e)=>{
+  useEffect(() => {
+    props.getArticles();
+  }, []);
+
+  const handleClick = (e) => {
     e.preventDefault();
-    if(e.target !== e.currentTarget){
+    if (e.target !== e.currentTarget) {
       return;
     }
-    
-    switch(showModal){
-      case"open":
-        setShowModal("close")
+
+    switch (showModal) {
+      case "open":
+        setShowModal("close");
         break;
       case "close":
-        setShowModal("open")
+        setShowModal("open");
         break;
       default:
-        setShowModal("close")
-        break;  
+        setShowModal("close");
+        break;
     }
-  }
+  };
 
   return (
     <Container>
       <ShareBox>
-        share
         <div>
-          <img src='/images/user.svg' alt='' />
+          {props.user && props.user.photoURL ? (
+            <img src={props.user.photoURL} />
+          ) : (
+            <img src='/images/user.svg' alt='' />
+          )}
           <button onClick={handleClick}>Start a Post</button>
         </div>
         <div>
@@ -51,7 +60,8 @@ const Main = () => {
           </button>
         </div>
       </ShareBox>
-      <div>
+      <Content>
+        {props.loading && <img src='./images/spin.svg' />}
         <Article>
           <SharedActor>
             <a>
@@ -87,7 +97,8 @@ const Main = () => {
             </button>
           </SocialAction>
         </Article>
-      </div>
+      </Content>
+
       <PostModal showModal={showModal} handleClick={handleClick} />
     </Container>
   );
@@ -243,22 +254,22 @@ const SharedImage = styled.div`
 `;
 
 const SocialCounts = styled.ul`
-line-height:1.3;
-display:flex;
-align-items:flex-Start;
-overflow:auto;
-margin:0 16px;
-padding: 8px 0;
-border-bottom: 1px solid #e9e5d5;
-list-style:none;
-li{
-  margin-right:5px;
-  font-size:12px;
-  button{
-    display:flex;
+  line-height: 1.3;
+  display: flex;
+  align-items: flex-Start;
+  overflow: auto;
+  margin: 0 16px;
+  padding: 8px 0;
+  border-bottom: 1px solid #e9e5d5;
+  list-style: none;
+  li {
+    margin-right: 5px;
+    font-size: 12px;
+    button {
+      display: flex;
+    }
   }
-}
-`
+`;
 
 const SocialAction = styled.div`
   display: flex;
@@ -279,5 +290,22 @@ const SocialAction = styled.div`
   }
 `;
 
+const Content = styled.div`
+  text-align: center;
+  & > img {
+    width: 30px;
+  }
+`;
 
-export default Main;
+const mapStateToProps = (state) => {
+  return {
+    loading: state.articleState.loading,
+    user: state.userState.user,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  getArticles: () => dispatch(getArticleAPI()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
