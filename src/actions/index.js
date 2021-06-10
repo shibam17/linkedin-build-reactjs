@@ -1,5 +1,9 @@
 import { auth, provider, storage } from "../firebase";
-import { SET_USER, SET_LOADING_STATUS } from "../actions/actionType";
+import {
+  SET_USER,
+  SET_LOADING_STATUS,
+  GET_ARTICLES,
+} from "../actions/actionType";
 import db from "../firebase";
 
 export const setUser = (payload) => ({
@@ -10,6 +14,11 @@ export const setUser = (payload) => ({
 export const setLoading = (status) => ({
   type: SET_LOADING_STATUS,
   status: status,
+});
+
+export const getArticles = (payload) => ({
+  type: GET_ARTICLES,
+  payload: payload,
 });
 
 export function signInAPI() {
@@ -110,6 +119,7 @@ export function getArticleAPI() {
       .orderBy("actor.date", "desc")
       .onSnapshot((snapshot) => {
         payload = snapshot.docs.map((doc) => doc.data());
+        dispatch(getArticles(payload));
       });
   };
 }
